@@ -1,5 +1,5 @@
 // 当前设备屏幕的大小
-documentWidth = window.screen.availWidth;
+documentWidth = window.screen.availWidth * 0.8;
 
 // 游戏棋盘的大小(92%设备宽度)
 gridContainerWidth = 0.92 * documentWidth;
