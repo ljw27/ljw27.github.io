@@ -1,0 +1,180 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>My Resume</title>
+<link href="./public/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="./public/css/style.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="./public/js/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--- Jquery-->
+<!--- Goog Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<!-- Header Starts Here ---->
+	<div class="header">
+		<div class="container">
+			<div class="header-profile">
+				<img  class="img-cricle" src="./public/images/ljw27.png" alt="" style="display: block;border: 5px solid #eee" />
+			</div>
+		</div>
+	</div>
+	<div class="header-top">
+				<h2>梁继伟</h2>
+				<small>目标是成为一个<b>前端工程师（Front-end Developer）</b> <br>一直告诉自己，你败给的不是大山，而是鞋里的小石子。</small>
+	</div>
+	<!-- Header Ends Here -->
+	
+	<!--- Experience Starts Here -->
+	<div class="experience">
+		<div class="container">
+			<div class="exp-top">
+				<h3 class="top-title">About</h3>
+				<span class="line"></span>
+			</div>
+			<div class="exp-devide">
+				<h4>Experience</h4>
+				<span class="devide-line">
+				</span>
+				<label class="bag"></label>
+				<div class="exp-devide-grid-right">
+					<h5>大连理工大学人事考核系统维护</h5>
+					<small> 2013-09   至今</small>
+					<p>该系统是大连理工大学负责全体教职工年度考核的系统。该系统采用MVC基本模式，基于Tomcat + JSP + SQLServer2000开发，采用html、JavaScript、CSS、Ajax等前端技术。
+职责：系统维护，一是负责功能模块的修改和添加，使用到的技术ajax，html、css和js；二是负责全校教师考核数据的处理和导入，主要用到sql。</p>
+				</div>
+				<div class="exp-devide-grid-left">
+					<h5>云工作流调度研究（科研项目）</h5>
+					<small>2014-08 至 2015-03</small>
+					<p>职责：构建云工作流调度模型，用MATLAB编写调度模型，并用NSGA-II进行多目标优化</p>
+				</div>
+			</div>
+			<div class="exp-devide education">
+				<h4>Education</h4>
+				<span class="devide-line">
+				</span>
+				<label class="book"></label>
+				<div class="exp-devide-grid-right">
+					<h5>硕士学位</h5>
+					<small>大连理工大学</small>
+					<p>2013-09至2016-07，工学硕士，信息管理与电子政务专业</p>
+				</div>
+				<div class="exp-devide-grid-left">
+					<h5>学士学位</h5>
+					<small>沈阳航空航天大学</small>
+					<p>2009-09至2013-07，管理学学士，信息管理与信息系统专业</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!--- Experience Ends Here -->
+
+	<!-- Skills Starts Here -->
+
+	<div class="skills">
+		<div class="container">
+			<div class="skills-top">
+				<h3 class="top-title">Skills</h3>
+				<span class="line"></span>
+				<div class="row skill-grids text-center">
+									<div class="col-md-3 skill-column">	
+										<div class="skill-grid">
+											<div class="circle" id="circles-1"></div>									
+											 <h3>Bootstrap</h3>	
+											 <p>编写过简单的响应式布局的网页版个人简介。</p>
+										 </div>								  
+									</div>
+									<div class="col-md-3 skill-column">	
+										<div class="skill-grid">
+											<div class="circle" id="circles-2"></div>									
+											 <h3>jQuery</h3>	
+											 <p>应用jQuery、Ajax技术，后台基于PHP编写了一个网页版多人聊天室。</p>
+										 </div>								  
+									</div>
+									<div class="col-md-3 skill-column">	
+										<div class="skill-grid">
+											<div class="circle" id="circles-3"></div>									
+											 <h3>JavaScript</h3>	
+											 <p>基于canvas，用JS编写了一个网页版贪吃蛇小游戏。</p>
+										 </div>								  
+									</div>
+									<div class="col-md-3 skill-column">	
+										<div class="skill-grid">
+											<div class="circle" id="circles-4"></div>									
+											 <h3>HTML/CSS</h3>
+											 <p>搭建一个简易的个人博客。</p>	
+										 </div>								  
+									</div>
+									<div class="clearfix"> </div>
+					          </div>
+		</div>
+	</div>
+			<!--- Skill Script -->
+				<script type="text/javascript" src="./public/js/circles.js"></script>
+						         <script>
+									var colors = [
+											['#fff', '#2980b9'], ['#fff', '#2980b9'], ['#fff', '#2980b9'], ['#fff', '#2980b9']
+										];
+									for (var i = 1; i <= 6; i++) {
+										var child = document.getElementById('circles-' + i),
+											percentage = 40 + (i * 10);
+											
+										Circles.create({
+											id:         child.id,
+											percentage: percentage,
+											radius:     80,
+											width:      15,
+											number:   	percentage,
+											text:       '%',
+											colors:     colors[i - 1]
+										});
+									}
+							
+					</script>
+			<!--- Skill Script -->
+	</div>
+	<!--- Skills Ends Here -->
+	<!-- Social Media Connections -
+	<div class="social-media">
+		<div class="container">
+			<div class="social-media-top">
+				<h3 class="top-title">SOCIAL MEDIA CONNECTIONS</h3>
+				<span class="line"></span>
+				<ul class="social">
+					<li><i class="fb"></i></li>
+					<li><i class="tw"></i></li>
+					<li><i class="li"></i></li>
+					<li><i class="yt"></i></li>
+					<li><i class="ca"></i></li>
+					<li><i class="ph"></i></li>
+					<li><i class="gp"></i></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Social Media Connections -->
+	
+	
+	
+	<!--- Footer Starts Here -->
+	<div class="footer">
+		<div class="container">
+			<p class="copyright">2015 By <a href="ljw27.github.io">LJW27</a> </p>
+		</div>
+	</div>
+	<!--- Footer Ends Here -->
+</body>
+</html>
+
+
+
