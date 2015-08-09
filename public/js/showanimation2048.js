@@ -2,7 +2,10 @@ function showNumberWithAnimation(i,j,randNumber) {
 	var numberCell = $("#number-cell-" + i + "-" + j);
 	numberCell.css('background-color',getNumberBackgroundColor(randNumber));
 	numberCell.css('color',getNumberColor(randNumber));
-	numberCell.text(randNumber);
+	switch(randNumber) {
+		case 2:numberCell.text('小白');break;
+		case 4:numberCell.text('实习生');break;
+	}
 
 	numberCell.animate({
 		width:cellSlideLength,
