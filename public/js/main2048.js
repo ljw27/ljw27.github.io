@@ -109,7 +109,7 @@ function updateBoardView() {
 	}
 
 	$(".number-cell").css('line-height',cellSlideLength + 'px');//设置小方格的行高，文字居中
-	$(".number-cell").css('font-size',0.6*cellSlideLength + 'px');//设置小方格的字号
+	$(".number-cell").css('font-size',0.3*cellSlideLength + 'px');//设置小方格的字号
 }
 
 function generateOneNumber() {
