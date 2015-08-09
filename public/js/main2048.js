@@ -89,7 +89,20 @@ function updateBoardView() {
 				// 背景色根据数字的不同为不同
 				theNumberCell.css('background-color',getNumberBackgroundColor(board[i][j]));
 				theNumberCell.css('color',getNumberColor(board[i][j]));
-				theNumberCell.text(board[i][j]);
+				switch(board[i][j]) {
+					case 2:theNumberCell.text('小白');break;
+					case 4:theNumberCell.text('实习生');break;
+					case 8:theNumberCell.text('助理');break;
+					case 16:theNumberCell.text('程序猿');break;
+					case 32:theNumberCell.text('攻城狮');break;
+					case 64:theNumberCell.text('总管');break;
+					case 128:theNumberCell.text('经理');break;
+					case 256:theNumberCell.text('总监');break;
+					case 512:theNumberCell.text('总经理');break;
+					case 1024:theNumberCell.text('CEO');break;
+					case 2048:theNumberCell.text('董事长');break;
+
+				}
 			}
 			hasConflicted[i][j] = false;//新的一轮开始，都为false
 		}
