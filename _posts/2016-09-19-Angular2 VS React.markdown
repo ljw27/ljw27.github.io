@@ -4,7 +4,6 @@ title:  "Angular 2 VS. React： 血色将至"
 date:   2016-09-19 15:14:54
 categories: jekyll
 ---
-# Angular 2 VS. React： 血色将至
 
 > 本文转载自：[众成翻译](http://www.zcfy.cc)
 > 译者：[Atwood.Cai](http://www.zcfy.cc/@AtwoodCai)
