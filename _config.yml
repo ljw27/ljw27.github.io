@@ -1,8 +1,8 @@
-markdown: redcarpet
-highlighter: null
+markdown: kramdown
+highlighter: rouge
 permalink: /:title
 
-url:
+url:"http://ljw27.github.io"
 baseurl:
 
 redcarpet:
