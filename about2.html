@@ -81,7 +81,7 @@
             </section>
             <section data-transition="zoom" id="s2">
 
-                <div class="container" style="overflow-y: auto;height: 700px;">
+                <div class="container" style="height: 700px;">
                     <ul class="myTab">
                         <li><a href="#/s1" >Experience</a></li>
                         <li><a href="#/s2">Skills</a></li>
@@ -154,12 +154,14 @@
 <script>
     $(window).resize(function() {
         var blen = document.body.clientWidth;
-        if(blen < 768) {
+        if(blen > 768 && blen < 992) {
+            $("#s2").css("marginTop",-100);
+        }else if(blen < 768){
             $("#s2").css("marginTop",-300);
-        }else {
+        }else{
             $("#s2").css("marginTop",100);
         }
-    })
+    });
 
 
     Reveal.initialize({
