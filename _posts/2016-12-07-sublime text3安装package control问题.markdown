@@ -5,6 +5,7 @@ date:   2016-12-07 14:23:54
 categories: jekyll
 ---
 首先到sublime text3官网安装package control页面（[https://packagecontrol.io/installation#st3](https://packagecontrol.io/installation#st3)）。
+
 1. **自动安装**
 * 通过快捷键 ctrl+` 或者 View > Show Console 菜单打开控制台
 * 粘贴对应版本的代码后回车安装
