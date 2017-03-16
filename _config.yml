@@ -1,12 +1,13 @@
+title: Blog
+author: LJW27
+description: This blog records work experience.
+
 markdown: kramdown
 highlighter: rouge
 permalink: /:title
 
-url:"http://ljw27.github.io"
+url: 'http://ljw27.github.io'
 baseurl:
-
-redcarpet:
-  extensions: [strikethrough, tables]
 
 sass:
   sass_dir: public/css
