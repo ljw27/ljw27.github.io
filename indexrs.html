@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=0.5, user-scalable=yes" />
+	<title>桌位使用统计</title>
+	<link rel="stylesheet" type="text/css" href="./public/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./public/css/main.css">
+
+	<script type="text/html" id="statisticsPanel">
+	<thead>
+		<tr>
+			<th>桌号</th>
+			<th>使用频次</th>
+			<th>总人数</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="background-color: #c9e4e0;">
+			<td>总计</td>
+			<td>{{totalallTimes}}</td>
+			<td>{{totalallNum}}</td>
+		</tr>
+		{{each data as n}}
+		<tr>
+			<td>{{n.tableId}}</td>
+			<td>{{n.allTimes}}</td>
+			<td>{{n.allNum}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+	</script>
+</head>
+<body>
+
+
+<div class="main">
+	<div class="left">
+		<div style="width: 300px;height: 420px;">
+			<div style="height: 30px;">
+				<input type="date" name="" id="dateId">
+				<button id="searchTotal">统计</button>
+				<button id="dataExport">导出</button>
+			</div>
+			<div style="width: 300px;height: 380px;overflow-y: auto;">
+				<table class="table table-striped" id="statistics"></table>
+			</div>
+		</div>
+		<div class="left_bottom" style="border-right: 1px solid #000;">
+			<div class="desk_row">
+				<div class="desk_wrap"><span class="desk empty_6" data-id="27" data-value="6"></span><span class="desk_text">27</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="28" data-value="6"></span><span class="desk_text">28</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="29" data-value="6"></span><span class="desk_text">29</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="30" data-value="6"></span><span class="desk_text">30</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="31" data-value="6"></span><span class="desk_text">31</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="32" data-value="6"></span><span class="desk_text">32</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="33" data-value="6"></span><span class="desk_text">33</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 10px;">
+				<div class="desk_wrap"><span class="desk empty_4"></span><span class="desk_text" data-id="26">26</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_4" data-id="25" data-value="4"></span><span class="desk_text">25</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="23" data-value="6"></span><span class="desk_text">23</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="22" data-value="6"></span><span class="desk_text">22</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="21" data-value="6"></span><span class="desk_text">21</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="35" data-value="6"></span><span class="desk_text">35</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 10px;">
+				<div class="desk_wrap"><span class="desk empty_6" data-id="234" data-value="6"></span><span class="desk_text">234</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="17" data-value="4"></span><span class="desk_text">17</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="18" data-value="6"></span><span class="desk_text">18</span></div>
+				<div class="desk_wrap" style="margin-left: 40px;"><span class="desk empty_4" data-id="19" data-value="4"></span><span class="desk_text">19</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="20" data-value="4"></span><span class="desk_text">20</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 10px;">
+				<div class="desk_wrap" style="margin-left: 40px;"><span class="desk empty_4" data-id="16" data-value="4"></span><span class="desk_text">16</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="15" data-value="4"></span><span class="desk_text">15</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="13" data-value="6"></span><span class="desk_text">13</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="12" data-value="4"></span><span class="desk_text">12</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="11" data-value="4"></span><span class="desk_text">11</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="36" data-value="6"></span><span class="desk_text">36</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 50px;">
+				<div class="desk_wrap" style="margin-left: 40px;"><span class="desk empty_4" data-id="6" data-value="4"></span><span class="desk_text">6</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="7" data-value="4"></span><span class="desk_text">7</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="8" data-value="6"></span><span class="desk_text">8</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="9" data-value="4"></span><span class="desk_text">9</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="10" data-value="4"></span><span class="desk_text">10</span></div>
+				<div class="desk_wrap" style="margin-left: 15px;"><span class="desk empty_6" data-id="37" data-value="6"></span><span class="desk_text">37</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 10px;">
+				<div class="desk_wrap" style="margin-left: 40px;"><span class="desk empty_6" data-id="5" data-value="6"></span><span class="desk_text">5</span></div>
+				<div class="desk_wrap" style="margin-right: 25px;"><span class="desk empty_4" data-id="3" data-value="4"></span><span class="desk_text">3</span></div>
+				<div class="desk_wrap" style="margin-left: 25px;"><span class="desk empty_4" data-id="2" data-value="4"></span><span class="desk_text">2</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="1" data-value="6"></span><span class="desk_text">1</span></div>
+			</div>
+			<div class="desk_row" style="margin-top: 10px;">
+				<div class="desk_wrap"><span class="desk empty_6" data-id="253" data-value="6"></span><span class="desk_text">253</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="252" data-value="6"></span><span class="desk_text">252</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="251" data-value="6"></span><span class="desk_text">251</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="239" data-value="6"></span><span class="desk_text">239</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="238" data-value="6"></span><span class="desk_text">238</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="237" data-value="6"></span><span class="desk_text">237</span></div>
+				<div class="desk_wrap"><span class="desk empty_6" data-id="236" data-value="6"></span><span class="desk_text">236</span></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="center">
+		<div class="desk_row">
+			<div class="desk_wrap"><span class="desk empty_4" data-id="120" data-value="4"></span><span class="desk_text">120</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="121" data-value="4"></span><span class="desk_text">121</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="122" data-value="4"></span><span class="desk_text">122</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="123" data-value="4"></span><span class="desk_text">123</span></div>
+			<div class="desk_wrap"><span class="desk empty_6" data-id="125" data-value="6"></span><span class="desk_text">125</span></div>
+			<div class="desk_wrap"><span class="desk empty_6" data-id="126" data-value="6"></span><span class="desk_text">126</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="127" data-value="4"></span><span class="desk_text">127</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="128" data-value="4"></span><span class="desk_text">128</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="129" data-value="4"></span><span class="desk_text">129</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="130" data-value="4"></span><span class="desk_text">130</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="131" data-value="4"></span><span class="desk_text">131</span></div>
+			<div class="desk_wrap"><span class="desk empty_2" data-id="132" data-value="2"></span><span class="desk_text">132</span></div>
+		</div>
+		<div style="width: 500px;height: 300px;margin-top: -10px;">
+			<div style="display: inline-block;width: 42px;height: 300px;">
+				<div class="desk_wrap"><span class="desk empty_6" data-id="119" data-value="6"></span><span class="desk_text">119</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="118" data-value="4"></span><span class="desk_text">118</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="117" data-value="4"></span><span class="desk_text">117</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="116" data-value="4"></span><span class="desk_text">116</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="115" data-value="4"></span><span class="desk_text">115</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="113" data-value="4"></span><span class="desk_text">113</span></div>
+			</div>
+			<div style="display: inline-block;width: 250px;height: 300px;">
+				<div class="desk_row" style="margin-top: 30px;">
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="110" data-value="6"></span><span class="desk_text">110</span></div>
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="111" data-value="6"></span><span class="desk_text">111</span></div>
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="112" data-value="6"></span><span class="desk_text">112</span></div>
+				</div>
+				<div class="desk_row" style="margin-top: 30px;">
+					<div class="desk_wrap"><span class="desk empty_4" data-id="109" data-value="4"></span><span class="desk_text">109</span></div>
+					<div class="desk_wrap"><span class="desk empty_4" data-id="108" data-value="4"></span><span class="desk_text">108</span></div>
+					<div class="desk_wrap"><span class="desk empty_4" data-id="107" data-value="4"></span><span class="desk_text">107</span></div>
+					<div class="desk_wrap"><span class="desk empty_4" data-id="106" data-value="4"></span><span class="desk_text">106</span></div>
+					<div class="desk_wrap"><span class="desk empty_4" data-id="105" data-value="4"></span><span class="desk_text">105</span></div>
+					<div class="desk_wrap"><span class="desk empty_4" data-id="103"  data-value="4"></span><span class="desk_text">103</span></div>
+				</div>
+				<div class="desk_row" style="margin-top: 30px;">
+					<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_6" data-id="98" data-value="6"></span><span class="desk_text">98</span></div>
+					<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="99" data-value="4"></span><span class="desk_text">99</span></div>
+					<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="100" data-value="4"></span><span class="desk_text">100</span></div>
+					<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="101" data-value="4"></span><span class="desk_text">101</span></div>
+					<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="102" data-value="4"></span><span class="desk_text">102</span></div>
+				</div>
+				<div class="desk_row" style="margin-top: 30px;">
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="97" data-value="6"></span><span class="desk_text">97</span></div>
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="96" data-value="6"></span><span class="desk_text">96</span></div>
+					<div class="desk_wrap" style="margin-left: 35px;"><span class="desk empty_6" data-id="95" data-value="6"></span><span class="desk_text">95</span></div>
+				</div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 20px;">
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="93" data-value="4"></span><span class="desk_text">93</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="92" data-value="4"></span><span class="desk_text">92</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="91" data-value="4"></span><span class="desk_text">91</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="90" data-value="4"></span><span class="desk_text">90</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="89" data-value="4"></span><span class="desk_text">89</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 15px;">
+				<div class="desk_wrap"><span class="desk empty_6" data-id="80" data-value="6"></span><span class="desk_text">80</span></div>
+				<div class="desk_wrap"><span class="desk empty_4" data-id="81" data-value="4"></span><span class="desk_text">81</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="82" data-value="2"></span><span class="desk_text">82</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="83" data-value="2"></span><span class="desk_text">83</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="85" data-value="2"></span><span class="desk_text">85</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="86" data-value="2"></span><span class="desk_text">86</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 15px;">
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="79" data-value="6"></span><span class="desk_text">79</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="78" data-value="6"></span><span class="desk_text">78</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="77" data-value="6"></span><span class="desk_text">77</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="76" data-value="6"></span><span class="desk_text">76</span></div>
+			</div>
+		</div>
+		<div style="width: 500px;height: 300px;margin-top: 25px;">
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="50" data-value="6"></span><span class="desk_text">50</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="39" data-value="6"></span><span class="desk_text">39</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="38" data-value="6"></span><span class="desk_text">38</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 40px;"><span class="desk empty_4" data-id="51" data-value="4"></span><span class="desk_text">51</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="52" data-value="4"></span><span class="desk_text">52</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="53" data-value="4"></span><span class="desk_text">53</span></div>
+				<div class="desk_wrap" style="margin-top: 40px;"><span class="desk empty_6" data-id="55" data-value="6"></span><span class="desk_text">55</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="60" data-value="4"></span><span class="desk_text">60</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="59" data-value="4"></span><span class="desk_text">59</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="58" data-value="4"></span><span class="desk_text">58</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="57" data-value="4"></span><span class="desk_text">57</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="56" data-value="4"></span><span class="desk_text">56</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="61"></span><span class="desk_text">61</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="62"></span><span class="desk_text">62</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="63"></span><span class="desk_text">63</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="67" data-value="6"></span><span class="desk_text">67</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="66" data-value="6"></span><span class="desk_text">66</span></div>
+				<div class="desk_wrap" style="margin-top: 30px;"><span class="desk empty_6" data-id="65" data-value="6"></span><span class="desk_text">65</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap"><span class="desk empty_2" data-id="73" data-value="2"></span><span class="desk_text">73</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="72" data-value="2"></span><span class="desk_text">72</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="71" data-value="2"></span><span class="desk_text">71</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="70" data-value="2"></span><span class="desk_text">70</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="69" data-value="2"></span><span class="desk_text">69</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="68" data-value="2"></span><span class="desk_text">68</span></div>
+			</div>
+		</div>
+		<div style="width: 500px;height: 250px;margin-top: 10px;">
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap" style="margin-top: 20px;"><span class="desk empty_2" data-id="231" data-value="2"></span><span class="desk_text">231</span></div>
+				<div class="desk_wrap" style="margin-top: 20px;"><span class="desk empty_4" data-id="232" data-value="4"></span><span class="desk_text">232</span></div>
+				<div class="desk_wrap" style="margin-top: 20px;"><span class="desk empty_4" data-id="233" data-value="4"></span><span class="desk_text">233</span></div>
+				<div class="desk_wrap" style="margin-top: 20px;"><span class="desk empty_6" data-id="235" data-value="6"></span><span class="desk_text">235</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 40px;"><span class="desk empty_4" data-id="227" data-value="4"></span><span class="desk_text">227</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="228" data-value="4"></span><span class="desk_text">228</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="229" data-value="4"></span><span class="desk_text">229</span></div>
+				<div class="desk_wrap" style="margin-top: 40px;"><span class="desk empty_6" data-id="230" data-value="6"></span><span class="desk_text">230</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="222" data-value="4"></span><span class="desk_text">222</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="223" data-value="4"></span><span class="desk_text">223</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="225" data-value="4"></span><span class="desk_text">225</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_4" data-id="226" data-value="4"></span><span class="desk_text">226</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="217" data-value="2"></span><span class="desk_text">217</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="218" data-value="2"></span><span class="desk_text">218</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="219" data-value="2"></span><span class="desk_text">219</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="220" data-value="2"></span><span class="desk_text">220</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="221" data-value="2"></span><span class="desk_text">221</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 25px;">
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="211" data-value="2"></span><span class="desk_text">211</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="212" data-value="2"></span><span class="desk_text">212</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="213" data-value="2"></span><span class="desk_text">213</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="215" data-value="2"></span><span class="desk_text">215</span></div>
+				<div class="desk_wrap" style="margin-top: 10px;"><span class="desk empty_2" data-id="216" data-value="2"></span><span class="desk_text">216</span></div>
+			</div>
+			<div style="display: inline-block; width: 42px;height: 300px;margin-left: 35px;">
+				<div class="desk_wrap"><span class="desk empty_2" data-id="206" data-value="2"></span><span class="desk_text">206</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="207" data-value="2"></span><span class="desk_text">207</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="208" data-value="2"></span><span class="desk_text">208</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="209" data-value="2"></span><span class="desk_text">209</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="210" data-value="2"></span><span class="desk_text">210</span></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="right">
+		<div class="desk_row">
+			<div class="desk_wrap"><span class="desk empty_8" data-id="136" data-value="8"></span><span class="desk_text">136</span></div>
+			<div class="desk_wrap"><span class="desk empty_6" data-id="137" data-value="6"></span><span class="desk_text">137</span></div>
+		</div>
+		<div class="desk_row">
+			<div class="desk_wrap"><span class="desk empty_8" data-id="135" data-value="8"></span><span class="desk_text">135</span></div>
+			<div class="desk_wrap"><span class="desk empty_6" data-id="138" data-value="6"></span><span class="desk_text">138</span></div>
+		</div>
+		<div class="desk_row" style="width: 325px;">
+			<div class="desk_wrap"><span class="desk empty_8" data-id="133" data-value="8"></span><span class="desk_text">133</span></div>
+			<div class="desk_wrap"><span class="desk empty_6" data-id="139" data-value="6"></span><span class="desk_text">139</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="150" data-value="4"></span><span class="desk_text">150</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="151" data-value="4"></span><span class="desk_text">151</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="152" data-value="4"></span><span class="desk_text">152</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="153" data-value="4"></span><span class="desk_text">153</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="155" data-value="4"></span><span class="desk_text">155</span></div>
+			<div class="desk_wrap"><span class="desk empty_4" data-id="156" data-value="4"></span><span class="desk_text">156</span></div>
+		</div>
+		<div class="desk_row">
+			<div class="desk_wrap" style="margin-left: 50px;"><span class="desk empty_4" data-id="157" data-value="4"></span><span class="desk_text">157</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="161" data-value="4"></span><span class="desk_text">161</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="162" data-value="4"></span><span class="desk_text">162</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="163" data-value="4"></span><span class="desk_text">163</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="165" data-value="4"></span><span class="desk_text">165</span></div>
+		</div>
+		<div class="desk_row">
+			<div class="desk_wrap" style="margin-left: 50px;"><span class="desk empty_4" data-id="158" data-value="4"></span><span class="desk_text">158</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="169" data-value="4"></span><span class="desk_text">169</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="168" data-value="4"></span><span class="desk_text">168</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="167" data-value="4"></span><span class="desk_text">167</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="166" data-value="4"></span><span class="desk_text">166</span></div>
+		</div>
+		<div class="desk_row">
+			<div class="desk_wrap" style="margin-left: 50px;"><span class="desk empty_4" data-id="159" data-value="4"></span><span class="desk_text">159</span></div>
+			<div class="desk_wrap" style="margin-left: 150px;"><span class="desk empty_4" data-id="170" data-value="4"></span><span class="desk_text">170</span></div>
+		</div>
+		<div class="desk_row">
+			<div class="desk_wrap" style="margin-left: 50px;"><span class="desk empty_4" data-id="160" data-value="4"></span><span class="desk_text">160</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_6" data-id="175" data-value="6"></span><span class="desk_text">175</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="173" data-value="4"></span><span class="desk_text">173</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="172" data-value="4"></span><span class="desk_text">172</span></div>
+			<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="171" data-value="4"></span><span class="desk_text">171</span></div>
+		</div>
+		<div style="width: 300px;height: 300px;margin-top: 50px;">
+			<div style="display: inline-block;width: 42px;height: 300px;">
+				<div class="desk_wrap"><span class="desk empty_2" data-id="176" data-value="2"></span><span class="desk_text">176</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="177" data-value="2"></span><span class="desk_text">177</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="178" data-value="2"></span><span class="desk_text">178</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="179" data-value="2"></span><span class="desk_text">179</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="180" data-value="2"></span><span class="desk_text">180</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="181" data-value="2"></span><span class="desk_text">181</span></div>
+			</div>
+			<div style="display: inline-block;width: 250px;height: 300px;">
+				<div class="desk_row">
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="182" data-value="4"></span><span class="desk_text">182</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="183" data-value="4"></span><span class="desk_text">183</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="185" data-value="4"></span><span class="desk_text">185</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="186" data-value="4"></span><span class="desk_text">186</span></div>
+				</div>
+				<div class="desk_row" style="margin-top: 50px;">
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="190" data-value="4"></span><span class="desk_text">190</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="189" data-value="4"></span><span class="desk_text">189</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="188" data-value="4"></span><span class="desk_text">188</span></div>
+					<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="187" data-value="4"></span><span class="desk_text">187</span></div>
+				</div>
+				<div class="desk_row" style="margin-top: 50px;">
+					<div class="desk_wrap" style="margin-left: 190px;"><span class="desk empty_4" data-id="191" data-value="4"></span><span class="desk_text">191</span></div>
+				</div>
+			</div>
+		</div>
+		<div style="width: 300px;height: 100px;margin-top: 70px;">
+			<div class="desk_row">
+				<div class="desk_wrap"><span class="desk empty_2" data-id="203" data-value="2"></span><span class="desk_text">203</span></div>
+				<div class="desk_wrap"><span class="desk empty_2" data-id="201" data-value="2"></span><span class="desk_text">201</span></div>
+				<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="196" data-value="4"></span><span class="desk_text">196</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="195" data-value="4"></span><span class="desk_text">195</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="193" data-value="4"></span><span class="desk_text">193</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="192" data-value="4"></span><span class="desk_text">192</span></div>
+			</div>
+			<div class="desk_row">
+				<div class="desk_wrap"><span class="desk empty_2"></span><span class="desk_text" data-id="205">205</span></div>
+				<div class="desk_wrap"><span class="desk empty_2"></span><span class="desk_text" data-id="202">202</span></div>
+				<div class="desk_wrap" style="margin-left: 20px;"><span class="desk empty_4" data-id="197" data-value="4"></span><span class="desk_text">197</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="198" data-value="4"></span><span class="desk_text">198</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="199" data-value="4"></span><span class="desk_text">199</span></div>
+				<div class="desk_wrap" style="margin-left: 10px;"><span class="desk empty_4" data-id="200" data-value="4"></span><span class="desk_text">200</span></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top: 200px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					标题
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div style="padding: 10px;">
+				人数：
+					<div class="btn-group" id="personNum" data-toggle="buttons">
+						<label class="btn btn-default"><input type="radio" class="toggle" value="1">1人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="2">2人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="3">3人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="4">4人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="5">5人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="6">6人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="7">7人</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="8">8人</label>
+					</div>
+				</div>
+				<div style="padding: 10px;">
+					状态：
+					<div class="btn-group" id="state" data-toggle="buttons">
+						<label class="btn btn-default"><input type="radio" class="toggle" value="1">空位</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="2">占用</label>
+						<label class="btn btn-default"><input type="radio" class="toggle" value="3">结束</label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="confirm">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+
+
+<script type="text/javascript" src="./public/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./public/js/bootstrap.js"></script>
+<script type="text/javascript" src="./public/js/template.js"></script>
+<script type="text/javascript" src="./public/js/FileSaver.js"></script>
+<script type="text/javascript" src="./public/js/Blob.js"></script>
+<script type="text/javascript" src="./public/js/main.js"></script>
+</body>
+</html>
