@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #metDays {
+      text-align: center;
+      display: inline-block;
+      font-size: 40px;
+      color: #fff;
+    }
+    .num {
+      text-align: center;
+      margin-top: 100px;
+    }
+    .title {
+      font-size: 24px;
+      color: #fff;
+      text-align: center;
+    }
+    .numtitle {
+      font-size: 12px;
+      color: #fff;
+    }
+    .meetdate {
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      margin-top: 80px;
+    }
+    .content {
+      position: absolute;
+      width: 300px;
+      top: 50px;
+      left: 50%;
+      margin-left: -150px;
+    }
+    .wrap {
+      background: url('./public/images/gotit.jpg') center 0 no-repeat;
+      background-size:cover;
+      height: 400px;
+      position: relative;
+      filter: blur(5px);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="wrap"></div>
+    <div class="content">
+      <div class="title">在一起</div>
+      <div class="num">
+        <span class="numtitle">第</span>
+        <div id="metDays"></div>
+        <span class="numtitle">天</span>
+      </div>
+      <div class="meetdate">2018-05-26</div>
+    </div>
+  </div>
+  <script>
+    var metDay = new Date('2018-05-26').getTime()
+    var today = new Date().getTime()
+    var oneDay = 1000 * 60 * 60 * 24
+    var metDays = Math.ceil((today- metDay) / oneDay)
+    document.getElementById('metDays').innerText = metDays
+  </script>
+</body>
+</html>
