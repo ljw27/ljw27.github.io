@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>执子之手与子偕老</title>
   <style>
+    /* html,body {
+      height: 100%;
+    } */
     #metDays {
       text-align: center;
       display: inline-block;
@@ -31,26 +34,72 @@
       color: #fff;
       margin-top: 80px;
     }
-    .content {
+    .contentday {
       position: absolute;
       width: 300px;
       top: 50px;
       left: 50%;
       margin-left: -150px;
+      z-index: 1000;
     }
     .wrap {
-      background: url('./public/images/gotit.jpg') center 0 no-repeat;
+      background: url('./public/images/gotit.png') center 0 no-repeat;
       background-size:cover;
+      /* background-size: 100% 100%; */
       height: 400px;
       position: relative;
-      filter: blur(5px);
+      filter: blur(3px);
+      z-index: 999;
     }
+
+    body {
+    margin: 0;
+}
+
+.content {
+    width: 100vw;
+    min-height: 300px;
+}
+.content-barrage {
+    /* height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0; */
+    min-height: 300px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    position: relative;
+}
+
+.content-barrage-single {
+    /* top: 200px; */
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 4px 18px;
+    color: rgb(231, 80, 80);
+    position: absolute;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+/*  为了防止突兀的出现 现在是从又到左面的负一屏 但是影响性能 可以根据自己的业务场景修改 */
+
+@keyframes barrage {
+  from {
+      left: 100%;
+  }
+  to {
+      left: -100%;
+  }
+}
   </style>
 </head>
 <body>
-  <div>
+  <div class="background">
     <div class="wrap"></div>
-    <div class="content">
+    <div class="contentday">
       <div class="title">我和大宝贝儿在一起</div>
       <div class="num">
         <span class="numtitle">第</span>
@@ -60,12 +109,64 @@
       <div class="meetdate">2018-05-26</div>
     </div>
   </div>
+  <div class="content">
+    <div class="content-barrage" id="content-barrage">
+        <!-- 我是弹幕层 -->
+        <!-- <div class="content-barrage-single">
+            地方卡号是的房间号就开始对方后就开始对方很快就史蒂芬霍金
+        </div> -->
+    </div>
+  </div>
   <script>
     var metDay = new Date('2018-05-26').getTime()
     var today = new Date().getTime()
     var oneDay = 1000 * 60 * 60 * 24
     var metDays = Math.ceil((today- metDay) / oneDay)
     document.getElementById('metDays').innerText = metDays
+
+    /**
+   * 获取指定范围的随机数
+   * @param {*开始} start
+   * @param {*技术} end
+   */
+  function Random(start, end) {
+    let num = (Math.random() * (end - start) + start).toString();
+    return parseInt(num, 10);
+  }
+
+  /**
+   * 添加一个弹幕
+   * @param {*内容} text
+   */
+  function SetBarrage(text) {
+    // 创建dom并添加class 和各种数据
+    var barrage = document.createElement('span');
+    barrage.className = "content-barrage-single";
+    barrage.innerText = text;
+    document.getElementById('content-barrage').appendChild(barrage);
+    // 创建弹幕从右到左面的10-15的随机秒数
+    const randomTime = Random(10, 15);
+    // 创建离上方的距离  百分比 现在是半屏
+    const randomTop = Random(0, 90);
+    barrage.style.top = randomTop + "%";
+    barrage.style.animation = "barrage " + randomTime + "s linear";
+    // 添加一个定时器 在运行完成之后删除这个DOM
+    setTimeout(() => {
+        document.getElementById('content-barrage').removeChild(barrage)
+    }, randomTime * 1000);
+  }
+
+  // 循环执行
+  var textArr = ['大宝贝儿', '大漂亮', '挣钱养你', '要面儿', '减肥中...', '我不离家出走，就在附近转转...']
+  function renderText() {
+    textArr.forEach((item, index) => {
+      if (Math.random() > 0.5) {
+        SetBarrage(item)
+      }
+    })
+  }
+  renderText()
+  setInterval(renderText, 5000)
   </script>
 </body>
 </html>
