@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>双色球</title>
+  <style>
+    .ball {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      color: #fff;
+      text-align: center;
+      line-height: 20px;
+      display: inline-block;
+      font-size: 12px;
+      margin: 5px;
+    }
+    .big-ball {
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+    .btn {
+      padding: 5px 15px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      background-color: #e7e4e4;
+      border: 1px solid #e3d8d8;
+      border-radius: 10px;
+    }
+    .disabled {
+      opacity: 0.5;
+    }
+    .deleteRow {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="btn" id="showExclude">禁止选取</div>
+  <div id="wrapExclude" style="max-width: 600px;margin: auto;display: flex;">
+    <div style="flex:2;">
+      <span class="ball red" data-value="1">1</span>
+      <span class="ball red" data-value="2">2</span>
+      <span class="ball red" data-value="3">3</span>
+      <span class="ball red" data-value="4">4</span>
+      <span class="ball red" data-value="5">5</span>
+      <span class="ball red" data-value="6">6</span>
+      <span class="ball red" data-value="7">7</span>
+      <span class="ball red" data-value="8">8</span>
+      <span class="ball red" data-value="9">9</span>
+      <span class="ball red" data-value="10">10</span>
+      <span class="ball red" data-value="11">11</span>
+      <span class="ball red" data-value="12">12</span>
+      <span class="ball red" data-value="13">13</span>
+      <span class="ball red" data-value="14">14</span>
+      <span class="ball red" data-value="15">15</span>
+      <span class="ball red" data-value="16">16</span>
+      <span class="ball red" data-value="17">17</span>
+      <span class="ball red" data-value="18">18</span>
+      <span class="ball red" data-value="19">19</span>
+      <span class="ball red" data-value="20">20</span>
+      <span class="ball red" data-value="21">21</span>
+      <span class="ball red" data-value="22">22</span>
+      <span class="ball red" data-value="23">23</span>
+      <span class="ball red" data-value="24">24</span>
+      <span class="ball red" data-value="25">25</span>
+      <span class="ball red" data-value="26">26</span>
+      <span class="ball red" data-value="27">27</span>
+      <span class="ball red" data-value="28">28</span>
+      <span class="ball red" data-value="29">29</span>
+      <span class="ball red" data-value="30">30</span>
+      <span class="ball red" data-value="31">31</span>
+      <span class="ball red" data-value="32">32</span>
+      <span class="ball red" data-value="33">33</span>
+    </div>
+    <div style="flex:1;margin-left: 10px;">
+      <span class="ball blue" data-value="1">1</span>
+      <span class="ball blue" data-value="2">2</span>
+      <span class="ball blue" data-value="3">3</span>
+      <span class="ball blue" data-value="4">4</span>
+      <span class="ball blue" data-value="5">5</span>
+      <span class="ball blue" data-value="6">6</span>
+      <span class="ball blue" data-value="7">7</span>
+      <span class="ball blue" data-value="8">8</span>
+      <span class="ball blue" data-value="9">9</span>
+      <span class="ball blue" data-value="10">10</span>
+      <span class="ball blue" data-value="11">11</span>
+      <span class="ball blue" data-value="12">12</span>
+      <span class="ball blue" data-value="13">13</span>
+      <span class="ball blue" data-value="14">14</span>
+      <span class="ball blue" data-value="15">15</span>
+      <span class="ball blue" data-value="16">16</span>
+    </div>
+  </div>
+  <div class="btn" id="randomGeneration" style="margin: 20px 0;">随机生成</div>
+  <div style="max-width: 600px;margin: auto;" id="result">
+
+  </div>
+  <script src="./public/js/jquery-3.1.1.min.js"></script>
+  <script>
+    var RandomResult = []
+    $('#wrapExclude').hide()
+    $(document).on('click', '#showExclude', function() {
+      $('#wrapExclude').toggle()
+    }).on('click', '.ball', function(e) {
+      var el = $(this)
+      if (el.hasClass('disabled')) {
+        el.removeClass('disabled')
+      } else {
+        el.addClass('disabled')
+      }
+    }).on('click', '#randomGeneration', function() {
+      var redball = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+      var blueball = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+      var reddisabled = $('.ball.red.disabled')
+      var bluedisabled = $('.ball.blue.disabled')
+      if (reddisabled.length > 0) {
+        for (var i=0; i<reddisabled.length; i++) {
+          var num = Number(reddisabled[i].dataset.value)
+          var index = redball.indexOf(num)
+          redball.splice(index, 1)
+        }
+      }
+      if (bluedisabled.length > 0) {
+        for (var i=0; i<bluedisabled.length; i++) {
+          var num = Number(bluedisabled[i].dataset.value)
+          var index = blueball.indexOf(num)
+          blueball.splice(index, 1)
+        }
+      }
+      var result = {
+        red: [],
+        blue: randomNum(blueball)
+      }
+      while (result.red.length < 6) {
+        var rednum = randomNum(redball)
+        if (result.red.indexOf(rednum) === -1) {
+          result.red.push(rednum);
+        }
+      }
+      result.red.sort(function(n1, n2) {
+        return n1 - n2
+      })
+      RandomResult.push(result)
+      renderResult()
+    }).on('click', '.deleteRow', function(e) {
+      var index = e.currentTarget.dataset.index
+      RandomResult.splice(index, 1)
+      renderResult()
+    })
+    
+    function randomNum(arr) {
+      var index = Math.floor(Math.random() * arr.length)
+      return arr[index]
+    }
+
+    function renderResult() {
+      var str = ''
+      RandomResult.forEach(function(item, index) {
+        var tempRow = `<div>
+          <span class="ball big-ball red">${item.red[0]}</span>
+          <span class="ball big-ball red">${item.red[1]}</span>
+          <span class="ball big-ball red">${item.red[2]}</span>
+          <span class="ball big-ball red">${item.red[3]}</span>
+          <span class="ball big-ball red">${item.red[4]}</span>
+          <span class="ball big-ball red">${item.red[5]}</span>
+          <span class="ball big-ball blue" style="margin-left:10px;">${item.blue}</span>
+          <span data-index="${index}" class="deleteRow">删除</span>
+          </div>`
+          str += tempRow
+      })
+      $('#result').html(str)
+    }
+    
+  </script>
+</body>
+</html>
