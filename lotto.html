@@ -7,12 +7,12 @@
   <title>双色球</title>
   <style>
     .ball {
-      height: 25px;
-      width: 25px;
+      height: 20px;
+      width: 20px;
       border-radius: 50%;
       color: #fff;
       text-align: center;
-      line-height: 25px;
+      line-height: 20px;
       display: inline-block;
       font-size: 12px;
       margin: 5px;
@@ -38,11 +38,35 @@
       border: 1px solid #e3d8d8;
       border-radius: 10px;
     }
+    .small-btn {
+      display: inline-block;
+      font-size: 12px;
+    }
     .disabled {
+      background-color: #938b8b;
+    }
+    .normal {
       background-color: #938b8b;
     }
     .deleteRow {
       color: blue;
+    }
+    .input-ball {
+      background-color: #938b8b;
+    }
+    .showType {
+      display: none;
+    }
+    #input {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      background-color: #dfd9d9;
+      padding: 20px 0;
+      border-radius: 10px;
+    }
+    .selected {
+      background-color: #03a9f4;
     }
   </style>
 </head>
@@ -107,9 +131,75 @@
   <div style="max-width: 600px;margin: auto;" id="result">
 
   </div>
+  <div style="margin-top: 20px;">
+    <div class="btn small-btn" id="inprtWinning">输入中奖号码</div>
+    <div class="btn small-btn" id="showPreResult">展示上期购买号码</div>
+    <div class="btn small-btn" id="confirm">判断命中号码</div>
+  </div>
+  <div id="winning-result"></div>
+  <div id="buy-result"></div>
+  <div id="input" class="showType" style="max-width: 600px;margin: auto;">
+    <div style="display: flex;">
+      <div style="flex: 2;">
+        <span class="ball input-ball b1" data-value="1">1</span>
+        <span class="ball input-ball b1" data-value="2">2</span>
+        <span class="ball input-ball b1" data-value="3">3</span>
+        <span class="ball input-ball b1" data-value="4">4</span>
+        <span class="ball input-ball b1" data-value="5">5</span>
+        <span class="ball input-ball b1" data-value="6">6</span>
+        <span class="ball input-ball b1" data-value="7">7</span>
+        <span class="ball input-ball b1" data-value="8">8</span>
+        <span class="ball input-ball b1" data-value="9">9</span>
+        <span class="ball input-ball b1" data-value="10">10</span>
+        <span class="ball input-ball b1" data-value="11">11</span>
+        <span class="ball input-ball b1" data-value="12">12</span>
+        <span class="ball input-ball b1" data-value="13">13</span>
+        <span class="ball input-ball b1" data-value="14">14</span>
+        <span class="ball input-ball b1" data-value="15">15</span>
+        <span class="ball input-ball b1" data-value="16">16</span>
+        <span class="ball input-ball b1" data-value="17">17</span>
+        <span class="ball input-ball b1" data-value="18">18</span>
+        <span class="ball input-ball b1" data-value="19">19</span>
+        <span class="ball input-ball b1" data-value="20">20</span>
+        <span class="ball input-ball b1" data-value="21">21</span>
+        <span class="ball input-ball b1" data-value="22">22</span>
+        <span class="ball input-ball b1" data-value="23">23</span>
+        <span class="ball input-ball b1" data-value="24">24</span>
+        <span class="ball input-ball b1" data-value="25">25</span>
+        <span class="ball input-ball b1" data-value="26">26</span>
+        <span class="ball input-ball b1" data-value="27">27</span>
+        <span class="ball input-ball b1" data-value="28">28</span>
+        <span class="ball input-ball b1" data-value="29">29</span>
+        <span class="ball input-ball b1" data-value="30">30</span>
+        <span class="ball input-ball b1" data-value="31">31</span>
+        <span class="ball input-ball b1" data-value="32">32</span>
+        <span class="ball input-ball b1" data-value="33">33</span>
+      </div>
+      <div style="flex: 1;">
+        <span class="ball input-ball b2" data-value="1">1</span>
+        <span class="ball input-ball b2" data-value="2">2</span>
+        <span class="ball input-ball b2" data-value="3">3</span>
+        <span class="ball input-ball b2" data-value="4">4</span>
+        <span class="ball input-ball b2" data-value="5">5</span>
+        <span class="ball input-ball b2" data-value="6">6</span>
+        <span class="ball input-ball b2" data-value="7">7</span>
+        <span class="ball input-ball b2" data-value="8">8</span>
+        <span class="ball input-ball b2" data-value="9">9</span>
+        <span class="ball input-ball b2" data-value="10">10</span>
+        <span class="ball input-ball b2" data-value="11">11</span>
+        <span class="ball input-ball b2" data-value="12">12</span>
+        <span class="ball input-ball b2" data-value="13">13</span>
+        <span class="ball input-ball b2" data-value="14">14</span>
+        <span class="ball input-ball b2" data-value="15">15</span>
+        <span class="ball input-ball b2" data-value="16">16</span>
+      </div>
+    </div>
+    <div style="margin-top:10px;"><div class="btn small-btn" id="saveWinning">保存</div></div>
+  </div>
   <script src="./public/js/jquery-3.1.1.min.js"></script>
   <script>
     var RandomResult = []
+    var winningResult = {red: [], blue: ''}
     $('#wrapExclude').hide()
     $(document).on('click', '#showExclude', function() {
       $('#wrapExclude').toggle()
@@ -158,11 +248,61 @@
       var index = e.currentTarget.dataset.index
       RandomResult.splice(index, 1)
       renderResult()
+    }).on('click', '#save', function() {
+      localStorage.setItem('result', JSON.stringify(RandomResult))
+    }).on('click', '#inprtWinning', function() {
+      $('#input').removeClass('showType')
+    }).on('click', '.input-ball', function() {
+      if ($(this).hasClass('selected')) {
+        $(this).removeClass('selected')
+      } else {
+        $(this).addClass('selected')
+      }
+    }).on('click', '#saveWinning', function() {
+      var redball = $('.input-ball.b1.selected')
+      var blueball = $('.input-ball.b2.selected')
+      for (var i=0; i<redball.length; i++) {
+        var num = Number(redball[i].dataset.value)
+        winningResult.red.push(num)
+      }
+      for (var i=0; i<blueball.length; i++) {
+        var num = Number(blueball[i].dataset.value)
+        winningResult.blue = num
+      }
+      $('#input').addClass('showType')
+      renderWinningResult()
+    }).on('click', '#showPreResult', function() {
+      var result = localStorage.getItem('result')
+      if (result) {
+        result =JSON.parse(result)
+      }
+      renderBuyResult(result, {red: [], blue: ''})
+    }).on('click', '#confirm', function() {
+      var result = localStorage.getItem('result')
+      if (result) {
+        result =JSON.parse(result)
+      } else {
+        result = {red: [], blue: ''}
+      }
+      renderBuyResult(result, winningResult)
     })
     
     function randomNum(arr) {
       var index = Math.floor(Math.random() * arr.length)
       return arr[index]
+    }
+
+    function renderWinningResult() {
+      var str = `<div>
+        <span class="ball big-ball red">${winningResult.red[0]}</span>
+        <span class="ball big-ball red">${winningResult.red[1]}</span>
+        <span class="ball big-ball red">${winningResult.red[2]}</span>
+        <span class="ball big-ball red">${winningResult.red[3]}</span>
+        <span class="ball big-ball red">${winningResult.red[4]}</span>
+        <span class="ball big-ball red">${winningResult.red[5]}</span>
+        <span class="ball big-ball blue" style="margin-left:10px;">${winningResult.blue}</span>
+        </div>`
+      $('#winning-result').html(str)
     }
 
     function renderResult() {
@@ -180,8 +320,37 @@
           </div>`
           str += tempRow
       })
+      var saveBtn = '<div style="margin-top:10px;"><div class="btn small-btn" id="save">保存</div></div>'
+      str += saveBtn
       $('#result').html(str)
     }
+
+
+    function renderBuyResult(buy, win) {
+      var str = '<div style="font-size: 12px;margin: 20px 0 0 0;">上期购买号码</div>'
+      buy.forEach(function(item, index) {
+        var tempRow = `<div>
+          <span class="ball big-ball ${isInArr(win.red, item.red[0]) ? 'red' : 'normal'}">${item.red[0]}</span>
+          <span class="ball big-ball ${isInArr(win.red, item.red[1]) ? 'red' : 'normal'}">${item.red[1]}</span>
+          <span class="ball big-ball ${isInArr(win.red, item.red[2]) ? 'red' : 'normal'}">${item.red[2]}</span>
+          <span class="ball big-ball ${isInArr(win.red, item.red[3]) ? 'red' : 'normal'}">${item.red[3]}</span>
+          <span class="ball big-ball ${isInArr(win.red, item.red[4]) ? 'red' : 'normal'}">${item.red[4]}</span>
+          <span class="ball big-ball ${isInArr(win.red, item.red[5]) ? 'red' : 'normal'}">${item.red[5]}</span>
+          <span class="ball big-ball ${item.blue === win.blue ? 'blue' : 'normal'}" style="margin-left:10px;">${item.blue}</span>
+          </div>`
+          str += tempRow
+      })
+      $('#buy-result').html(str)
+    }
+
+    function isInArr(arr, num) {
+      console.log(arr, num, arr.indexOf(num))
+      if (arr.indexOf(num) !== -1) {
+        return true
+      } else {
+        return false
+      }
+    } 
     
   </script>
 </body>
