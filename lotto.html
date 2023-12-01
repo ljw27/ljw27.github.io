@@ -68,6 +68,22 @@
     .selected {
       background-color: #03a9f4;
     }
+    #message {
+      box-shadow: 0 2px 4px rgba(0,0,0,.12),0 0 6px rgba(0,0,0,.04);
+      width: 40vw;
+      padding: 8px 15px;
+      border-radius: 5px;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      transition: opacity .3s,transform .4s;
+      overflow: hidden;
+      text-align: center;
+      z-index: 2001;
+    }
   </style>
 </head>
 <body>
@@ -194,7 +210,10 @@
         <span class="ball input-ball b2" data-value="16">16</span>
       </div>
     </div>
-    <div style="margin-top:10px;"><div class="btn small-btn" id="saveWinning">保存</div></div>
+    <div style="margin-top:10px;">
+      <div class="btn small-btn" id="saveWinning">保存</div>
+      <div class="btn small-btn" id="cancelWinning">取消</div>
+    </div>
   </div>
   <script src="./public/js/jquery-3.1.1.min.js"></script>
   <script>
@@ -250,6 +269,7 @@
       renderResult()
     }).on('click', '#save', function() {
       localStorage.setItem('result', JSON.stringify(RandomResult))
+      showMessage('已保存')
     }).on('click', '#inprtWinning', function() {
       $('#input').removeClass('showType')
     }).on('click', '.input-ball', function() {
@@ -285,6 +305,8 @@
         result = {red: [], blue: ''}
       }
       renderBuyResult(result, winningResult)
+    }).on('click', '#cancelWinning', function() {
+      $('#input').addClass('showType')
     })
     
     function randomNum(arr) {
@@ -351,6 +373,16 @@
         return false
       }
     } 
+    function showMessage(message) {
+      var newElement = document.createElement('div')
+      newElement.setAttribute('id', 'message')
+      newElement.innerHTML = message
+      document.body.appendChild(newElement)
+      
+      setTimeout(function() {
+        document.body.removeChild(newElement);
+      },2000)
+    }
     
   </script>
 </body>
