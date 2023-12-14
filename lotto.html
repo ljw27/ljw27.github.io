@@ -212,6 +212,7 @@
     </div>
     <div style="margin-top:10px;">
       <div class="btn small-btn" id="saveWinning">保存</div>
+      <div class="btn small-btn" id="showPreWinning">展示上期中奖号码</div>
       <div class="btn small-btn" id="cancelWinning">取消</div>
     </div>
   </div>
@@ -279,6 +280,7 @@
         $(this).addClass('selected')
       }
     }).on('click', '#saveWinning', function() {
+      winningResult.red = []
       var redball = $('.input-ball.b1.selected')
       var blueball = $('.input-ball.b2.selected')
       for (var i=0; i<redball.length; i++) {
@@ -290,7 +292,15 @@
         winningResult.blue = num
       }
       $('#input').addClass('showType')
+      localStorage.setItem('preWiningRsult', JSON.stringify(winningResult))
       renderWinningResult()
+    }).on('click', '#showPreWinning', function() {
+      var pre = localStorage.getItem('preWiningRsult')
+      if (pre) {
+        pre = JSON.parse(pre)
+        winningResult = pre
+        renderWinningResult()
+      }
     }).on('click', '#showPreResult', function() {
       var result = localStorage.getItem('result')
       if (result) {
