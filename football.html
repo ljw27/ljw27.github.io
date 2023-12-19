@@ -11222,10 +11222,16 @@
       var oneGameWining5 = 0 // 一期14场，预测成功5场数量
       var oneGameWiningBelow4 = 0 // 一期14场，预测成功4场及以下数量
 
-      DATA.forEach(function (item) {
+      var sucess20 = [] // 最近50场 猜对的比赛数量
+      var failBig50 = [] // 最近50场 ，每场 赔率大于3的冷门
+      var big3 = [] // 每一期赔率大于3的场次
+
+      DATA.forEach(function (item, index) {
         var scoreArr = item.result // 比赛结果
         var predictionArr = item.prediction // 预测结果
         var oneGameSucess = 0 // 一期中，预测正确数量
+        var failBig3 = 0 // 一期中赔率大于3，预测错误
+        var preBig3 = 0 // 一期中赔率大于3的场次
         scoreArr.forEach(function (item1, index1) {
           total += 1
           // * 表示比赛暂停，直接算入预测成功
@@ -11324,9 +11330,11 @@
 
           // 7.主客赔率差值在3~4,主队实力弱
           if (3 < diffPre && diffPre <= 4) {
+            preBig3 += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail3 += 1
+              failBig3 += 1
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess3 += 1
@@ -11337,9 +11345,11 @@
 
           // 8.主客赔率差值在-4~-3,主队实力强
           if (-4 < diffPre && diffPre <= -3) {
+            preBig3 += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail3 += 1
+              failBig3 += 1
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess3 += 1
@@ -11350,9 +11360,11 @@
 
           // 9.主客赔率差值在4~5,主队实力弱
           if (4 < diffPre && diffPre <= 5) {
+            preBig3 += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail4 += 1
+              failBig3 += 1
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess4 += 1
@@ -11363,9 +11375,11 @@
 
           // 10.主客赔率差值在-5~-4,主队实力强
           if (-5 < diffPre && diffPre <= -4) {
+            preBig3 += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail4 += 1
+              failBig3 += 1
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess4 += 1
@@ -11376,9 +11390,11 @@
 
           // 11.主客赔率差值在5以上,主队实力弱
           if (5 < diffPre) {
+            preBig3 += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               failOther += 1
+              failBig3 += 1
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucessOther += 1
@@ -11389,9 +11405,11 @@
 
           // 12.主客赔率差值在-5以下,主队实力强
           if (diffPre <= -5) {
+            preBig3 += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               failOther += 1
+              failBig3 += 1
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucessOther += 1
@@ -11425,39 +11443,49 @@
         } else {
           oneGameWiningBelow4 += 1
         }
+        if (index < 50) {
+          sucess20.push(oneGameSucess)
+        }
+        if (index < 50) {
+          failBig50.push(failBig3)
+          big3.push(preBig3)
+        }
       })
       document.getElementById('analysisResult').innerText = `
-      总比赛数量：${total}
-      预测成功数量: ${sucess}
-      预测成功率：${(sucess / total * 100).toFixed(2)}% 
+总比赛数量：${total}
+预测成功数量: ${sucess}
+预测成功率：${(sucess / total * 100).toFixed(2)}% 
 
-      赔率差值在[0~1]内，预测成功或者平数量: ${sucess0}，成功率：${(sucess0 / (sucess0 + fail0) * 100).toFixed(2)}%
-      赔率差值在[1~2]内，预测成功数量:  ${sucess1}，     成功率：${(sucess1 / (sucess1 + fail1) * 100).toFixed(2)}%
-      赔率差值在[2~3]内，预测成功数量: ${sucess2}，      成功率：${(sucess2 / (sucess2 + fail2) * 100).toFixed(2)}%
-      赔率差值在[3~4]内，预测成功数量: ${sucess3}，      成功率：${(sucess3 / (sucess3 + fail3) * 100).toFixed(2)}%
-      赔率差值在[4~5]内，预测成功数量:${sucess4}，        成功率：${(sucess4 / (sucess4 + fail4) * 100).toFixed(2)}%
-      赔率差值在5以上，预测成功数量: ${sucessOther}，        成功率：${(sucessOther / (sucessOther + failOther) * 100).toFixed(2)}%
-     
-      赔率差值在[0~1]内，预测输球数量: ${fail0}，  失败率：${(fail0 / (sucess0 + fail0) * 100).toFixed(2)}%
-      赔率差值在[1~2]内，预测失败数量: ${fail1}，  失败率：${(fail1 / (sucess1 + fail1) * 100).toFixed(2)}%
-      赔率差值在[2~3]内，预测失败数量: ${fail2}，  失败率：${(fail2 / (sucess2 + fail2) * 100).toFixed(2)}%
-      赔率差值在[3~4]内，预测失败数量: ${fail3}，  失败率：${(fail3 / (sucess3 + fail3) * 100).toFixed(2)}%
-      赔率差值在[4~5]内，预测失败数量: ${fail4}，   失败率：${(fail4 / (sucess4 + fail4) * 100).toFixed(2)}%
-      赔率差值在5以上，预测失败数量: ${failOther}，    失败率：${(failOther / (sucessOther + failOther) * 100).toFixed(2)}%
-      
-      一期14场，预测成功14场数量: ${oneGameWining14}，         占比：${(oneGameWining14 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功13场数量: ${oneGameWining13}，         占比：${(oneGameWining13 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功12场数量: ${oneGameWining12}，        占比：${(oneGameWining12 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功11场数量: ${oneGameWining11}，        占比：${(oneGameWining11 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功10场数量: ${oneGameWining10}，        占比：${(oneGameWining10 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功9场数量: ${oneGameWining9}，         占比：${(oneGameWining9 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功8场数量: ${oneGameWining8}，         占比：${(oneGameWining8 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功7场数量: ${oneGameWining7}，         占比：${(oneGameWining7 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功6场数量: ${oneGameWining6}，         占比：${(oneGameWining6 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功5场数量: ${oneGameWining5}，         占比：${(oneGameWining5 / DATA.length * 100).toFixed(2)}%
-      一期14场，预测成功4场及以下数量: ${oneGameWiningBelow4}，    占比：${(oneGameWiningBelow4 / DATA.length * 100).toFixed(2)}%
-     
-      `
+赔率差值在[0~1]内，预测成功或者平数量: ${sucess0}，成功率：${(sucess0 / (sucess0 + fail0) * 100).toFixed(2)}%
+赔率差值在[1~2]内，预测成功数量:  ${sucess1}，     成功率：${(sucess1 / (sucess1 + fail1) * 100).toFixed(2)}%
+赔率差值在[2~3]内，预测成功数量: ${sucess2}，      成功率：${(sucess2 / (sucess2 + fail2) * 100).toFixed(2)}%
+赔率差值在[3~4]内，预测成功数量: ${sucess3}，      成功率：${(sucess3 / (sucess3 + fail3) * 100).toFixed(2)}%
+赔率差值在[4~5]内，预测成功数量:${sucess4}，        成功率：${(sucess4 / (sucess4 + fail4) * 100).toFixed(2)}%
+赔率差值在5以上，预测成功数量: ${sucessOther}，        成功率：${(sucessOther / (sucessOther + failOther) * 100).toFixed(2)}%
+
+赔率差值在[0~1]内，预测输球数量: ${fail0}，  失败率：${(fail0 / (sucess0 + fail0) * 100).toFixed(2)}%
+赔率差值在[1~2]内，预测失败数量: ${fail1}，  失败率：${(fail1 / (sucess1 + fail1) * 100).toFixed(2)}%
+赔率差值在[2~3]内，预测失败数量: ${fail2}，  失败率：${(fail2 / (sucess2 + fail2) * 100).toFixed(2)}%
+赔率差值在[3~4]内，预测失败数量: ${fail3}，  失败率：${(fail3 / (sucess3 + fail3) * 100).toFixed(2)}%
+赔率差值在[4~5]内，预测失败数量: ${fail4}，   失败率：${(fail4 / (sucess4 + fail4) * 100).toFixed(2)}%
+赔率差值在5以上，预测失败数量: ${failOther}，    失败率：${(failOther / (sucessOther + failOther) * 100).toFixed(2)}%
+
+一期14场，预测成功14场数量: ${oneGameWining14}，         占比：${(oneGameWining14 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功13场数量: ${oneGameWining13}，         占比：${(oneGameWining13 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功12场数量: ${oneGameWining12}，        占比：${(oneGameWining12 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功11场数量: ${oneGameWining11}，        占比：${(oneGameWining11 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功10场数量: ${oneGameWining10}，        占比：${(oneGameWining10 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功9场数量: ${oneGameWining9}，         占比：${(oneGameWining9 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功8场数量: ${oneGameWining8}，         占比：${(oneGameWining8 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功7场数量: ${oneGameWining7}，         占比：${(oneGameWining7 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功6场数量: ${oneGameWining6}，         占比：${(oneGameWining6 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功5场数量: ${oneGameWining5}，         占比：${(oneGameWining5 / DATA.length * 100).toFixed(2)}%
+一期14场，预测成功4场及以下数量: ${oneGameWiningBelow4}，    占比：${(oneGameWiningBelow4 / DATA.length * 100).toFixed(2)}%
+
+最近50场每场猜对比赛数量：${sucess20.toString()}
+最近50场每场赔率大于3猜错比赛数量：${failBig50.toString()}
+最近50场每场赔率大于3总比赛数量：  ${big3.toString()}
+`
     }
 
     analysis()
