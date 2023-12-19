@@ -11209,6 +11209,12 @@
       var fail3 = 0 // 赔率差值在[3,4]内，预测失败数量
       var fail4 = 0 // 赔率差值在[4,5]内，预测失败数量
       var failOther = 0 // 赔率差值在5以上，预测失败数量
+      var draw0 = 0 // 赔率差值在[0,1]内，平局
+      var draw1 = 0 // 赔率差值在[1,2]内，平局
+      var draw2 = 0 // 赔率差值在[2,3]内，平局
+      var draw3 = 0 // 赔率差值在[3,4]内，平局
+      var draw4 = 0 // 赔率差值在[4,5]内，平局
+      var drawOther = 0 // 赔率差值在5以上，平局
 
       var oneGameWining14 = 0 // 一期14场，预测成功14场数量
       var oneGameWining13 = 0 // 一期14场，预测成功13场数量
@@ -11260,6 +11266,9 @@
               sucess0 += 1
               sucess += 1
               oneGameSucess += 1
+              if (homeScore === visitingScore) {
+                draw0 += 1
+              }
             }
           }
 
@@ -11270,6 +11279,9 @@
               sucess0 += 1
               sucess += 1
               oneGameSucess += 1
+              if (homeScore === visitingScore) {
+                draw0 += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢，预测失败
               fail0 += 1
@@ -11281,6 +11293,9 @@
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail1 += 1
+              if (homeScore === visitingScore) {
+                draw1 += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess1 += 1
@@ -11294,6 +11309,9 @@
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail1 += 1
+              if (homeScore === visitingScore) {
+                draw1 += 1
+              }
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess1 += 1
@@ -11307,6 +11325,9 @@
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail2 += 1
+              if (homeScore === visitingScore) {
+                draw2 += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess2 += 1
@@ -11320,6 +11341,9 @@
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail2 += 1
+              if (homeScore === visitingScore) {
+                draw2 += 1
+              }
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess2 += 1
@@ -11335,6 +11359,9 @@
               // 主队赢或者平，预测失败
               fail3 += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                draw3 += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess3 += 1
@@ -11350,6 +11377,9 @@
               // 客队赢或者平，预测失败
               fail3 += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                draw3 += 1
+              }
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess3 += 1
@@ -11365,6 +11395,9 @@
               // 主队赢或者平，预测失败
               fail4 += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                draw4 += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucess4 += 1
@@ -11380,6 +11413,9 @@
               // 客队赢或者平，预测失败
               fail4 += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                draw4 += 1
+              }
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucess4 += 1
@@ -11395,6 +11431,9 @@
               // 主队赢或者平，预测失败
               failOther += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                drawOther += 1
+              }
             } else if (homeScore < visitingScore) {
               // 客队赢球，预测成功
               sucessOther += 1
@@ -11410,6 +11449,9 @@
               // 客队赢或者平，预测失败
               failOther += 1
               failBig3 += 1
+              if (homeScore === visitingScore) {
+                drawOther += 1
+              }
             } else if (homeScore > visitingScore) {
               // 主队赢球，预测成功
               sucessOther += 1
@@ -11469,6 +11511,30 @@
 赔率差值在[3~4]内，预测失败数量: ${fail3}，  失败率：${(fail3 / (sucess3 + fail3) * 100).toFixed(2)}%
 赔率差值在[4~5]内，预测失败数量: ${fail4}，   失败率：${(fail4 / (sucess4 + fail4) * 100).toFixed(2)}%
 赔率差值在5以上，预测失败数量: ${failOther}，    失败率：${(failOther / (sucessOther + failOther) * 100).toFixed(2)}%
+
+赔率差值在[0~1]内，胜: ${sucess0 - draw0}，  占比：${((sucess0 - draw0) / (sucess0 + fail0) * 100).toFixed(2)}%
+赔率差值在[0~1]内，平: ${draw0}，  占比：${(draw0 / (sucess0 + fail0) * 100).toFixed(2)}%
+赔率差值在[0~1]内，负: ${fail0}，  占比：${(fail0 / (sucess0 + fail0) * 100).toFixed(2)}%
+
+赔率差值在[1~2]内，胜: ${sucess1}，  占比：${(sucess1 / (sucess1 + fail1) * 100).toFixed(2)}%
+赔率差值在[1~2]内，平: ${draw1}，  占比：${(draw1 / (sucess1 + fail1) * 100).toFixed(2)}%
+赔率差值在[1~2]内，负: ${fail1-draw1}，  占比：${((fail1-draw1) / (sucess1 + fail1) * 100).toFixed(2)}%
+
+赔率差值在[2~3]内，胜: ${sucess2}，  占比：${(sucess2 / (sucess2 + fail2) * 100).toFixed(2)}%
+赔率差值在[2~3]内，平: ${draw2}，  占比：${(draw2 / (sucess2 + fail2) * 100).toFixed(2)}%
+赔率差值在[2~3]内，负: ${fail2-draw2}，  占比：${((fail2-draw2) / (sucess2 + fail2) * 100).toFixed(2)}%
+
+赔率差值在[3~4]内，胜: ${sucess3}，  占比：${(sucess3 / (sucess3 + fail3) * 100).toFixed(2)}%
+赔率差值在[3~4]内，平: ${draw3}，  占比：${(draw3 / (sucess3 + fail3) * 100).toFixed(2)}%
+赔率差值在[3~4]内，负: ${fail3-draw3}，  占比：${((fail3-draw3) / (sucess3 + fail3) * 100).toFixed(2)}%
+
+赔率差值在[4~5]内，胜: ${sucess4}，  占比：${(sucess4 / (sucess4 + fail4) * 100).toFixed(2)}%
+赔率差值在[4~5]内，平: ${draw4}，  占比：${(draw4 / (sucess4 + fail4) * 100).toFixed(2)}%
+赔率差值在[4~5]内，负: ${fail4-draw4}，  占比：${((fail4-draw4) / (sucess4 + fail4) * 100).toFixed(2)}%
+
+赔率差值在5以上，胜: ${sucessOther}，  占比：${(sucessOther / (sucessOther + failOther) * 100).toFixed(2)}%
+赔率差值在5以上，平: ${drawOther}，  占比：${(drawOther / (sucessOther + failOther) * 100).toFixed(2)}%
+赔率差值在5以上，负: ${failOther-drawOther}，  占比：${((failOther-drawOther) / (sucessOther + failOther) * 100).toFixed(2)}%
 
 一期14场，预测成功14场数量: ${oneGameWining14}，         占比：${(oneGameWining14 / DATA.length * 100).toFixed(2)}%
 一期14场，预测成功13场数量: ${oneGameWining13}，         占比：${(oneGameWining13 / DATA.length * 100).toFixed(2)}%
