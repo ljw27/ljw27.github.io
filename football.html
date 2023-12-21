@@ -12,7 +12,7 @@
       font-size: 12px;
       border: 1px solid #e9e7e7;
       text-align: center;
-      min-width: 13px;
+      min-width: 22px;
     }
   </style>
 </head>
@@ -11313,11 +11313,22 @@
       var oneGameWining5 = 0 // 一期14场，预测成功5场数量
       var oneGameWiningBelow4 = 0 // 一期14场，预测成功4场及以下数量
 
-      var sucess20 = [] // 最近50场 猜对的比赛数量
+      var sucess50 = [] // 最近50场 猜对的比赛数量
       var failBig50 = [] // 最近50场 ，每场 赔率大于3的冷门（预测错）
       var failBigBig50 = [] // 最近50场 ，每场 赔率大于5的冷门（预测错）
       var big3 = [] // 每一期赔率大于3的场次
       var big5 = [] // 每一期赔率大于5的场次
+       /* 每一期对应赔率猜错数 和 对应赔率总数 */
+      var total01 = []
+      var fail01 = []
+      var total12 = []
+      var fail12 = []
+      var total23 = []
+      var fail23 = []
+      var total34 = []
+      var fail34 = []
+      var total45 = []
+      var fail45 = []
 
       var big3fail = 0 // 赔率大于3都预测错的期数
       var big5fail = 0 // 赔率大于5都预测错的期数
@@ -11340,6 +11351,13 @@
         var fail4to5game = 0 // 赔率4~5都预测错的场次
         var preBig3 = 0 // 一期中赔率大于3的场次
         var preBig5 = 0 // 一期中赔率大于5的场次
+        /* 每一期对应赔率猜错数 和 对应赔率总数 */
+        var total01num = 0
+        var total12num = 0
+        var total23num = 0
+        var total34num = 0
+        var total45num = 0
+
         scoreArr.forEach(function (item1, index1) {
           total += 1
           // * 表示比赛暂停，直接算入预测成功
@@ -11360,6 +11378,7 @@
 
           // 1.主客赔率差值在0-1,主队实力弱
           if (0 < diffPre && diffPre <= 1) {
+            total01num += 1
             if (homeScore > visitingScore) {
               // 主队赢，预测失败
               fail0 += 1
@@ -11377,6 +11396,7 @@
 
           // 2.主客赔率差值在-1 ~ 0,主队实力强
           if (-1 < diffPre && diffPre <= 0) {
+            total01num += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测成功
               sucess0 += 1
@@ -11394,6 +11414,7 @@
 
           // 3.主客赔率差值在1~2,主队实力弱
           if (1 < diffPre && diffPre <= 2) {
+            total12num += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail1 += 1
@@ -11411,6 +11432,7 @@
 
           // 4.主客赔率差值在-2~-1,主队实力强
           if (-2 < diffPre && diffPre <= -1) {
+            total12num += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail1 += 1
@@ -11428,6 +11450,7 @@
 
           // 5.主客赔率差值在2~3,主队实力弱
           if (2 < diffPre && diffPre <= 3) {
+            total23num += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail2 += 1
@@ -11445,6 +11468,7 @@
 
           // 6.主客赔率差值在-3~-2,主队实力强
           if (-3 < diffPre && diffPre <= -2) {
+            total23num += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail2 += 1
@@ -11462,6 +11486,7 @@
 
           // 7.主客赔率差值在3~4,主队实力弱
           if (3 < diffPre && diffPre <= 4) {
+            total34num += 1
             preBig3 += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
@@ -11482,6 +11507,7 @@
           // 8.主客赔率差值在-4~-3,主队实力强
           if (-4 < diffPre && diffPre <= -3) {
             preBig3 += 1
+            total34num += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail3 += 1
@@ -11501,6 +11527,7 @@
           // 9.主客赔率差值在4~5,主队实力弱
           if (4 < diffPre && diffPre <= 5) {
             preBig3 += 1
+            total45num += 1
             if (homeScore > visitingScore || homeScore === visitingScore) {
               // 主队赢或者平，预测失败
               fail4 += 1
@@ -11520,6 +11547,7 @@
           // 10.主客赔率差值在-5~-4,主队实力强
           if (-5 < diffPre && diffPre <= -4) {
             preBig3 += 1
+            total45num += 1
             if (homeScore < visitingScore || homeScore === visitingScore) {
               // 客队赢或者平，预测失败
               fail4 += 1
@@ -11631,34 +11659,30 @@
         if (failBig5) {
           big5fail += 1
         }
+        
         if (index < 50) {
-          sucess20.push(oneGameSucess)
-        }
-        if (index < 50) {
+          sucess50.push(oneGameSucess)
           failBig50.push(failBig3)
           failBigBig50.push(failBig5)
           big3.push(preBig3)
           big5.push(preBig5)
+
+          total01.push(total01num)
+          fail01.push(fail0to1game)
+          total12.push(total12num)
+          fail12.push(fail1to2game)
+          total23.push(total23num)
+          fail23.push(fail2to3game)
+          total34.push(total34num)
+          fail34.push(fail3to4game)
+          total45.push(total45num)
+          fail45.push(fail4to5game)
         }
       })
       document.getElementById('analysisResult').innerText = `
 总比赛数量：${total}
 预测成功数量: ${sucess}
 预测成功率：${(sucess / total * 100).toFixed(2)}% 
-
-赔率差值在[0~1]内，预测成功或者平数量: ${sucess0}，成功率：${(sucess0 / (sucess0 + fail0) * 100).toFixed(2)}%
-赔率差值在[1~2]内，预测成功数量:  ${sucess1}，     成功率：${(sucess1 / (sucess1 + fail1) * 100).toFixed(2)}%
-赔率差值在[2~3]内，预测成功数量: ${sucess2}，      成功率：${(sucess2 / (sucess2 + fail2) * 100).toFixed(2)}%
-赔率差值在[3~4]内，预测成功数量: ${sucess3}，      成功率：${(sucess3 / (sucess3 + fail3) * 100).toFixed(2)}%
-赔率差值在[4~5]内，预测成功数量:${sucess4}，        成功率：${(sucess4 / (sucess4 + fail4) * 100).toFixed(2)}%
-赔率差值在5以上，预测成功数量: ${sucessOther}，        成功率：${(sucessOther / (sucessOther + failOther) * 100).toFixed(2)}%
-
-赔率差值在[0~1]内，预测输球数量: ${fail0}，  失败率：${(fail0 / (sucess0 + fail0) * 100).toFixed(2)}%
-赔率差值在[1~2]内，预测失败数量: ${fail1}，  失败率：${(fail1 / (sucess1 + fail1) * 100).toFixed(2)}%
-赔率差值在[2~3]内，预测失败数量: ${fail2}，  失败率：${(fail2 / (sucess2 + fail2) * 100).toFixed(2)}%
-赔率差值在[3~4]内，预测失败数量: ${fail3}，  失败率：${(fail3 / (sucess3 + fail3) * 100).toFixed(2)}%
-赔率差值在[4~5]内，预测失败数量: ${fail4}，   失败率：${(fail4 / (sucess4 + fail4) * 100).toFixed(2)}%
-赔率差值在5以上，预测失败数量: ${failOther}，    失败率：${(failOther / (sucessOther + failOther) * 100).toFixed(2)}%
 
 赔率差值在[0~1]内，胜: ${sucess0 - draw0}，  占比：${((sucess0 - draw0) / (sucess0 + fail0) * 100).toFixed(2)}%
 赔率差值在[0~1]内，平: ${draw0}，  占比：${(draw0 / (sucess0 + fail0) * 100).toFixed(2)}%
@@ -11697,43 +11721,55 @@
 一期14场，预测成功4场及以下数量: ${oneGameWiningBelow4}，    占比：${(oneGameWiningBelow4 / DATA.length * 100).toFixed(2)}%
 
 总期数：${DATA.length}
-赔率大于3比赛预测正确期数：${DATA.length - big3fail}，占总期数比例：${((DATA.length - big3fail) / DATA.length * 100).toFixed(2)}%
-赔率大于5比赛预测正确期数：${DATA.length - big5fail}，占总期数比例：${((DATA.length - big5fail) / DATA.length * 100).toFixed(2)}%
 赔率0~1比赛预测正确期数：${DATA.length - fail0to1}，占总期数比例：${((DATA.length - fail0to1) / DATA.length * 100).toFixed(2)}%
 赔率1~2比赛预测正确期数：${DATA.length - fail1to2}，占总期数比例：${((DATA.length - fail1to2) / DATA.length * 100).toFixed(2)}%
 赔率2~3比赛预测正确期数：${DATA.length - fail2to3}，占总期数比例：${((DATA.length - fail2to3) / DATA.length * 100).toFixed(2)}%
 赔率3~4比赛预测正确期数：${DATA.length - fail3to4}，占总期数比例：${((DATA.length - fail3to4) / DATA.length * 100).toFixed(2)}%
 赔率4~5比赛预测正确期数：${DATA.length - fail4to5}，占总期数比例：${((DATA.length - fail4to5) / DATA.length * 100).toFixed(2)}%
+赔率大于5比赛预测正确期数：${DATA.length - big5fail}，占总期数比例：${((DATA.length - big5fail) / DATA.length * 100).toFixed(2)}%
+赔率大于3比赛预测正确期数：${DATA.length - big3fail}，占总期数比例：${((DATA.length - big3fail) / DATA.length * 100).toFixed(2)}%
 
 最近50场每场猜对比赛数量：表格第1行
-最近50场每场赔率大于3总比赛数量： 表格第2行
-最近50场每场赔率大于3猜错比赛数量：表格第3行
-最近50场每场赔率大于5比赛数量：表格第4行
-最近50场每场赔率大于5猜错比赛数量：表格第5行
+最近50场每场赔率0-1（猜对数/总比赛）：表格第2行
+最近50场每场赔率1-2（猜对数/总比赛）：表格第3行
+最近50场每场赔率2-3（猜对数/总比赛）：表格第4行
+最近50场每场赔率3-4（猜对数/总比赛）：表格第5行
+最近50场每场赔率4-5（猜对数/总比赛）：表格第6行
+最近50场每场赔率大于5（猜对数/总比赛）： 表格第7行
+最近50场每场赔率大于3（猜对数/总比赛）：表格第8行
 `
-      last50analysis(sucess20, big3, failBig50, big5, failBigBig50)
+      last50analysis(sucess50, big3, failBig50, big5, failBigBig50,total01,fail01,total12,fail12,total23,fail23,total34,fail34,total45,fail45)
     }
 
-    function last50analysis(sucess, big3, big3Fail, big5, failBigBig50) {
+    function last50analysis(sucess, big3, big3Fail, big5, failBigBig50, total01, fail01,total12, fail12,total23, fail23,total34, fail34,total45, fail45) {
       var html1 = ''
       var html2 = ''
       var html3 = ''
       var html4 = ''
       var html5 = ''
+      var html6 = ''
+      var html7 = ''
+      var html8 = ''
       sucess.forEach(function (item, index) {
         html1 += `<div class="item">${item}</div>`
-        html2 += `<div class="item">${big3[index]}</div>`
-        html3 += `<div class="item">${big3Fail[index]}</div>`
-        html4 += `<div class="item">${big5[index]}</div>`
-        html5 += `<div class="item">${failBigBig50[index]}</div>`
+        html2 += `<div class="item">${fail01[index]}/${total01[index]}</div>`
+        html3 += `<div class="item">${fail12[index]}/${total12[index]}</div>`
+        html4 += `<div class="item">${fail23[index]}/${total23[index]}</div>`
+        html5 += `<div class="item">${fail34[index]}/${total34[index]}</div>`
+        html6 += `<div class="item">${fail45[index]}/${total45[index]}</div>`
+        html7 += `<div class="item">${failBigBig50[index]}/${big5[index]}</div>`
+        html8 += `<div class="item">${big3Fail[index]}/${big3[index]}</div>`
       })
       html1 = '<div style="display: flex;">' + html1 + '</div>'
       html2 = '<div style="display: flex;">' + html2 + '</div>'
       html3 = '<div style="display: flex;">' + html3 + '</div>'
       html4 = '<div style="display: flex;">' + html4 + '</div>'
       html5 = '<div style="display: flex;">' + html5 + '</div>'
+      html6 = '<div style="display: flex;">' + html6 + '</div>'
+      html7 = '<div style="display: flex;">' + html7 + '</div>'
+      html8 = '<div style="display: flex;">' + html8 + '</div>'
 
-      var html = html1 + html2 + html3 + html4 + html5
+      var html = html1 + html2 + html3 + html4 + html5 + html6 + html7 + html8
       document.getElementById('last50').innerHTML = html
     }
 
