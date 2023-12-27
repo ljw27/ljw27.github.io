@@ -518,14 +518,14 @@
     }
 
     function last50analysis(sucess, big3, big3Fail, big5, failBigBig50, total01, fail01,total12, fail12,total23, fail23,total34, fail34,total45, fail45) {
-      var html1 = ''
-      var html2 = ''
-      var html3 = ''
-      var html4 = ''
-      var html5 = ''
-      var html6 = ''
-      var html7 = ''
-      var html8 = ''
+      var html1 = '<div class="item">猜对</div>'
+      var html2 = '<div class="item">0~1</div>'
+      var html3 = '<div class="item">1~2</div>'
+      var html4 = '<div class="item">2~3</div>'
+      var html5 = '<div class="item">3~4</div>'
+      var html6 = '<div class="item">4~5</div>'
+      var html7 = '<div class="item">5以上</div>'
+      var html8 = '<div class="item">3以上</div>'
       sucess.forEach(function (item, index) {
         html1 += `<div class="item">${item}</div>`
         html2 += `<div class="item">${fail01[index]}/${total01[index]}</div>`
