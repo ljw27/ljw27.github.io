@@ -22,10 +22,11 @@
   <pre id="analysisResult"></pre>
   <div id="last50"></div>
   <script src="./public/js/jquery-3.1.1.min.js"></script>
+  <script src="./public/Data2024.js"></script>
   <script src="./public/Data2023.js"></script>
   <script src="./public/Data2022.js"></script>
   <script>
-    var DATA = GameData2023.concat(GameData2022)
+    var DATA = GameData2024.concat(GameData2023.concat(GameData2022))
 
     // 处理数据, 数据网址：https://zx.500.com/zc/lsdz.php
     function formatData(str, index) {
